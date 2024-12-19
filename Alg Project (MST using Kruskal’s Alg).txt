@@ -1,0 +1,52 @@
+a. Required Algorithms for Finding MST using Kruskal's Algorithm: steps:
+
+  1- Sort Edges by Weight: sort all edges in non-decreasing order of their weights.
+
+  2- Union-Find Data Structure:
+     - Find Function: determine the root of the set containing a given element.(Using Path Compression)
+       Alg:
+       Find(parent, i)
+       Input: Array parent storing parent of each node, node i
+       if parent[i] ≠ i:
+         parent[i] = Find(parent, parent[i])  // Path compression
+       return parent[i]
+      
+     - Union Function: Merge two sets together.(by Rank for efficiency)
+       Alg:
+       Union(parent, rank, x, y)
+       Input: Arrays parent, rank, and nodes x, y
+       root X = Find(parent, x)
+       root Y = Find(parent, y)
+       if rank[rootX] < rank[rootY]:
+         parent[rootX] = rootY
+       else if rank[rootX] > rank[rootY]:
+         parent[rootY] = rootX
+       else:
+         parent[rootY] = rootX
+         rank[rootX] = rank[rootX] + 1
+
+  3- Kruskal's Algorithm: use the sorted edges and Union-Find structure to construct the MST
+     by iteratively adding the smallest edge that doesn't form a cycle.
+     Alg:
+     Kruskal(V, E)
+     Input: V (set of vertices), E (set of edges with weights)
+     MST = {}                   // Initialize MST as empty
+     Sort edges in E by weight
+     Initialize parent[] and rank[] for Union-Find
+     for each edge (u, v, weight) in sorted E:
+        if Find(parent, u) ≠ Find(parent, v):     // No cycle
+            MST = MST union with {(u, v, weight)}
+            Union(parent, rank, u, v)
+     return MST
+____________________________________________________________________________________________________________
+
+b. Analysis of Kruskal's Algorithm: 
+  1- Sorting the Edges: Time Complexity: O(ElogE), where E is the number of edges.
+  2- Union-Find Operations: Each Find and Union operation has an almost constant time complexity of O(α(V)),
+     where α is the inverse Ackermann function.
+     Across all edges and V is number of vertices, the complexity is O(Eα(V)).
+  3- all Alg Time Complexity: O(ElogE), because ElogE > Eα(V).
+*Space Complexity: O(V+E)
+____________________________________________________________________________________________________________
+c. C++ implementation of Kruskal's Algorithm
+
