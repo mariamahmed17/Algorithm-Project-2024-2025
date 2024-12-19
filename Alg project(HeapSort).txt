@@ -1,0 +1,40 @@
+a. Required Algorithms for Heapsort: 
+  1- Build Max-Heap Algorithm: transform the input array into a max-heap.
+   Alg: 
+   Build-Max-Heap(A, n)
+   Input: Array A, size n
+   for i = (n/2) - 1 down to 0:
+       Max-Heapify(A, i, n)
+
+  2- Heapsort Algorithm: extract the maximum value from the heap repeatedly and sort the array.
+   Alg: 
+   Heapsort(A, n)
+   Input: Array A, size n
+   Build-Max-Heap(A, n)
+   for i = n-1 down to 1:
+       Swap(A[0], A[i])   // Move max element to the end
+       Max-Heapify(A, 0, i)
+ 
+  3- Max-Heapify Algorithm: maintain the max-heap property by "pushing down" a value.
+   Alg:
+   Max-Heapify(A, i, n)
+   Input: Array A, index i, size n
+   left = 2 * i + 1           // Left child of node i
+   right = 2 * i + 2         // Right child of node i
+   largest = i              // Assume root is the largest
+   If left ≤ n-1 and A[left] > A[largest], then largest = left
+   If right ≤ n-1 and A[right] > A[largest], then largest = right
+   If largest ≠ i:
+       Swap(A[i], A[largest])
+       Max-Heapify(A, largest, n)
+
+_____________________________________________________________________________
+
+b. Analysis of the Algorithms:
+  1- Build-Max-Heap: Time Complexity: O(n)
+  2- Heapsort: Time Complexity: O(nlogn)
+  3- Max-Heapify: Time Complexity: O(logn)
+*Space Complexity: O(1)
+_____________________________________________________________________________
+
+c. C++ implementation of algorithms
